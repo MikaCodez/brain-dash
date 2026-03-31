@@ -42,7 +42,7 @@ export default function MatchDashboard() {
 
         {/* Center: Logo */}
         <div style={{position:'absolute', left:'50%', transform:'translateX(-50%)'}}>
-          <img src="/assets/balogo.jpg" alt="Brain Analytics" style={{height:'34px', objectFit:'contain', borderRadius:'6px'}} />
+          <img src="/assets/Malcz.png" alt="MalczCodez" style={{height:'34px', objectFit:'contain', borderRadius:'6px'}} />
 
         </div>
 
@@ -116,9 +116,6 @@ export default function MatchDashboard() {
           <div style={{display:'flex', flexDirection:'column', gap:'16px'}}>
             <PossessionBar stats={stats} dark={dark} />
             <ShotChart stats={stats} dark={dark} />
-            <div style={{borderRadius:'16px', overflow:'hidden', boxShadow:'0 1px 4px rgba(0,0,0,0.08)'}}>
-              <img src="/assets/bafulltag.jpg" alt="Brain Analytics" style={{width:'100%', display:'block', objectFit:'contain'}} />
-            </div>
           </div>
 
         </div>
