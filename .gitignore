@@ -1,0 +1,9 @@
+# Security
+.env
+.env.local
+.env.development.local
+
+# Dependencies
+node_modules/
+__pycache__/
+venv/
