@@ -8,7 +8,8 @@ import TacticalPitch from '../components/Pitch';
 import { PossessionBar, ShotChart } from '../components/Stats';
 
 export default function MatchDashboard() {
-  const { events, score, stats } = useMatchStream('http://localhost:8000/stream');
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+  const { events, score, stats } = useMatchStream(`${apiUrl}/stream`);
   const [dark, setDark] = useState(false);
 
   const t = {

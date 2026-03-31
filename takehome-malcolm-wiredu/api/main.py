@@ -4,9 +4,10 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from sse_starlette.sse import EventSourceResponse
 from commentary import get_ai_commentary
-from processor import get_zone
+from processor import MatchProcessor
 
 app = FastAPI()
+processor = MatchProcessor()
 
 app.add_middleware(
     CORSMiddleware,
@@ -22,7 +23,7 @@ with open("match_events.json") as f:
 async def stream_match():
     async def event_generator():
         for event in match_data['events']:
-            zone = get_zone(event['location']['x'], event['location']['y'], event['teamId']) if event['teamId'] else 'midfield'
+            zone = processor.get_zone(event['location']['x'], event['location']['y'], event['teamId']) if event['teamId'] else 'midfield'
 
             if event['type'] in ['goal', 'shot', 'foul', 'pass', 'var', 'tackle', 'interception', 'card', 'substitution', 'corner', 'free_kick']:
                 ai_text = await get_ai_commentary(event, zone)
