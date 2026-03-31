@@ -1,19 +1,50 @@
-# Live Match Dashboard - For Gaming Company
+# Brain Analytics — Live Match Dashboard
 
-A real-time football analytics dashboard built for Gaming Company, featuring live AI-powered match commentary, tactical pitch tracking, and live match statistics for Liverpool vs Manchester City.
+A real-time football analytics dashboard built for Brain Analytics, featuring live AI-powered match commentary, tactical pitch tracking, and live match statistics for Liverpool vs Manchester City.
 
 ---
 
-## Preview
+## Screenshots & UX Overview
 
-**Light Mode**
-- Live scoreboard with team photos and stadium background
-- Real-time AI commentary feed with player names
-- Tactical pitch view with ⚽ ball position tracker
-- Possession bar and match stats
+The dashboard was designed with accessibility and readability as core principles, offering both a light and dark mode to suit different viewing environments and user preferences.
 
-**Dark Mode**
-- Full dark theme toggle accessible from the navbar
+### Light Mode — Full Dashboard
+
+![Light Mode Dashboard](app/public/assets/light-mode.jpg)
+
+The light mode presents a clean, high-contrast layout suitable for daytime use or brightly lit environments. The white card system clearly separates each panel — commentary, pitch, and stats — making it easy to scan at a glance. Liverpool red and Man City blue are used consistently as team identifiers throughout every component, ensuring the viewer always knows which team is in possession or action without needing to read text.
+
+---
+
+### Dark Mode — Full Dashboard
+
+![Dark Mode Dashboard](app/public/assets/dark-mode.jpg)
+
+The dark mode uses deep navy and charcoal tones that reduce eye strain during extended viewing or evening use. All text meets WCAG AA contrast standards against the dark backgrounds. The toggle is accessible from the top-right navbar at any point. Both modes share identical layouts so there is no cognitive adjustment when switching between them.
+
+---
+
+### Live Commentary Feed
+
+![Live Commentary Feed](app/public/assets/commentary-feed.jpg)
+
+Each event card in the commentary feed is colour-coded by event type — green for passes and interceptions, red for fouls and cards, blue for tackles — providing instant visual context before the viewer reads the commentary text. Player name badges are coloured by team (Liverpool red, Man City blue). The most recent event is always highlighted at the top with a stronger border and background. Cards fade gently as they scroll down, reducing visual noise from older events while keeping them accessible for reference.
+
+---
+
+### Tactical Pitch View
+
+![Tactical Pitch View](app/public/assets/tactical-view.jpg)
+
+The tactical view uses a real aerial stadium photograph as the pitch background, giving the viewer a sense of presence rather than an abstract diagram. A ⚽ football tracks the ball's x/y coordinates from the match data in real time, with a subtle pulse animation to draw the eye. The current event type is shown as a badge in the top-right corner, and a label at the bottom shows the exact event and player name — allowing the viewer to follow the flow of play spatially without relying purely on the commentary text.
+
+---
+
+### Possession & Match Stats
+
+![Possession and Match Stats](app/public/assets/stats.jpg)
+
+The stats panel surfaces eight live metrics per team in a mirrored bar format — Liverpool stats on the left in red, Man City on the right in blue. This symmetrical layout makes comparisons instant. The possession bar at the top gives a quick overall impression of dominance, while the detailed rows below (Shots, On Target, Passes, Tackles, Interceptions, Fouls, Corners, Saves) allow deeper analysis. All bars animate smoothly as values update, providing a sense of momentum shifting throughout the match.
 
 ---
 
@@ -117,15 +148,23 @@ The model returns a single punchy sentence of CBS Sports Golazo-style commentary
 - 📊 **Live stats** — possession, shots on/off target, tackles, interceptions, fouls, corners, saves
 - 🌙 **Dark/Light mode** toggle
 - 🏃 **Player names** fully mapped for all 32 players across both squads
-- 🔁 **Auto-reconnection** — SSE hook reconnects automatically with exponential backoff if connection drops
+- 🔁 **Auto-reconnection** — SSE hook reconnects with exponential backoff if connection drops
 
 ---
 
 ## Testing
 
-Tests are written using **pytest** and cover the core `MatchProcessor` logic including zone calculations, stats tracking, score updates and possession calculations.
+### Why Testing Matters Here
 
-### Running the tests
+The `MatchProcessor` is the brain of this application — it calculates pitch zones from raw x/y coordinates, tracks stats for every event type, manages the live score, and computes possession percentages in real time. A bug in any of these calculations would silently produce incorrect data across the entire dashboard — wrong zones fed to the AI commentary, wrong scores displayed, inaccurate stats. Writing tests for this layer ensures the data pipeline is trustworthy before it ever reaches the frontend or OpenAI.
+
+### Test Report
+
+![Pytest Report](app/public/assets/report-html.jpg)
+
+The test suite was run on **31 March 2026** inside the Docker container using Python 3.11.15 with pytest 7.4.3. All 13 tests passed in 4ms with zero failures, skips or errors.
+
+### Running the Tests
 
 ```bash
 # Run inside the Docker container
@@ -135,18 +174,16 @@ docker exec brain-analytics-api python -m pytest tests/ -v
 docker exec brain-analytics-api python -m pytest tests/ -v --html=tests/report.html
 ```
 
-### Test Results
-
-Tests were run on **31 March 2026** using Python 3.11.15.
+### Test Results Summary
 
 | Result | Total Tests | Failed | Skipped | Duration |
 |--------|-------------|--------|---------|----------|
 | ✅ Pass | 13 | 0 | 0 | 4ms |
 
-### Test Coverage
+### Full Test Coverage
 
-| Test | Description | Result |
-|------|-------------|--------|
+| Test | What It Verifies | Result |
+|------|-----------------|--------|
 | `test_offensive_box_left_to_right` | Ball in offensive box when Liverpool attack left to right | ✅ Passed |
 | `test_offensive_third_left_to_right` | Ball in offensive third, Liverpool direction | ✅ Passed |
 | `test_defensive_box_left_to_right` | Ball in defensive box, Liverpool direction | ✅ Passed |
@@ -155,19 +192,19 @@ Tests were run on **31 March 2026** using Python 3.11.15.
 | `test_offensive_box_right_to_left` | Man City offensive box (right to left direction) | ✅ Passed |
 | `test_defensive_box_right_to_left` | Man City defensive box (right to left direction) | ✅ Passed |
 | `test_directions_swap_second_half` | Teams switch ends correctly at half time | ✅ Passed |
-| `test_corner_flag_position` | Edge coordinate (100, 0) returns valid zone | ✅ Passed |
-| `test_unknown_team_defaults` | Unknown team ID defaults to midfield | ✅ Passed |
-| `test_shot_on_target_increments` | Saved shot correctly increments shots on target | ✅ Passed |
-| `test_goal_updates_score` | Goal event correctly updates team score | ✅ Passed |
-| `test_possession_updates_with_passes` | Possession percentage calculated correctly from pass ratio | ✅ Passed |
+| `test_corner_flag_position` | Edge coordinate (100, 0) returns a valid zone | ✅ Passed |
+| `test_unknown_team_defaults` | Unknown team ID defaults safely to midfield | ✅ Passed |
+| `test_shot_on_target_increments` | Saved shot correctly increments shots on target stat | ✅ Passed |
+| `test_goal_updates_score` | Goal event correctly updates the scoring team's score | ✅ Passed |
+| `test_possession_updates_with_passes` | Possession percentage is correctly calculated from pass ratio | ✅ Passed |
 
 ### Key Findings
 
-- **Zone calculation is accurate** across both team directions including the half-time switch
-- **Stats tracking correctly differentiates** shot outcomes (on target, off target, blocked, woodwork)
-- **Score state updates independently** per team without affecting the opponent
-- **Possession calculation** is pass-ratio based and updates dynamically with each event
-- **Edge cases handled** — unknown teams default safely to midfield, corner flag coordinates return a valid zone
+- **Zone calculation is accurate** across both team directions including the half-time direction swap. Liverpool and Man City correctly swap their offensive and defensive zones when period 2 begins.
+- **Stats tracking correctly differentiates** shot outcomes — a saved shot increments `shots_on_target`, an off-target shot increments `shots_off_target`, and a blocked shot increments `shots_blocked`. These are tracked independently rather than as a single shots counter.
+- **Score state updates independently** per team — a Man City goal does not affect Liverpool's score and vice versa.
+- **Possession calculation** is pass-ratio based and recalculates dynamically after every pass event, meaning it reflects the live balance of play rather than a static value.
+- **Edge cases are handled gracefully** — an unknown team ID defaults to midfield rather than throwing an error, and a ball at the corner flag coordinates (100, 0) returns a valid zone without crashing.
 
 ---
 
@@ -207,29 +244,35 @@ docker exec brain-analytics-api python -m pytest tests/ -v
 ```
 takehome-malcolm-wiredu/
 ├── api/
-│   ├── commentary.py       # OpenAI GPT-4o-mini commentary generation
-│   ├── main.py             # FastAPI SSE stream + /state endpoint
-│   ├── models.py           # Pydantic models for type-safe data handling
-│   ├── processor.py        # MatchProcessor with pub/sub + zone + stats
-│   ├── match_events.json   # Liverpool vs Man City full match data
+│   ├── commentary.py          # OpenAI GPT-4o-mini commentary generation
+│   ├── main.py                # FastAPI SSE stream + /state endpoint
+│   ├── models.py              # Pydantic models for type-safe data handling
+│   ├── processor.py           # MatchProcessor with pub/sub + zone + stats
+│   ├── match_events.json      # Liverpool vs Man City full match data
 │   ├── requirements.txt
 │   └── tests/
 │       ├── __init__.py
 │       └── test_processor.py  # 13 pytest tests
 ├── app/
 │   ├── app/
-│   │   ├── page.tsx        # Main dashboard page
+│   │   ├── page.tsx           # Main dashboard page
 │   │   └── globals.css
 │   ├── components/
-│   │   ├── Feed.tsx        # Live commentary feed
-│   │   ├── Pitch.tsx       # Tactical pitch view
-│   │   ├── Scoreboard.tsx  # Live score header
-│   │   └── Stats.tsx       # Full match stats panel
+│   │   ├── Feed.tsx           # Live commentary feed
+│   │   ├── Pitch.tsx          # Tactical pitch view
+│   │   ├── Scoreboard.tsx     # Live score header
+│   │   └── Stats.tsx          # Full match stats panel
 │   ├── hooks/
 │   │   └── useMatchStream.ts  # SSE + reconnection + player name lookup
-│   └── public/assets/      # Team logos, stadium images
+│   └── public/assets/         # Team logos, stadium images, screenshots
+│       ├── light-mode.jpg
+│       ├── dark-mode.jpg
+│       ├── commentary-feed.jpg
+│       ├── tactical-view.jpg
+│       ├── stats.jpg
+│       └── report-html.jpg
 ├── docker-compose.yml
-└── .env                    # API key (not committed)
+└── .env                       # API key (not committed)
 ```
 
 ---
@@ -239,7 +282,7 @@ takehome-malcolm-wiredu/
 - **Framework:** Tailwind CSS + inline React styles
 - **Font:** Inter (body), Plus Jakarta Sans (headings)
 - **Colours:** Liverpool Red `#C8102E`, Man City Blue `#6CABDD`
-- **Themes:** Full light and dark mode support
+- **Themes:** Full light and dark mode support with WCAG AA contrast compliance
 
 ---
 
