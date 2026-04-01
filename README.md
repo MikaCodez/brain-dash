@@ -1,6 +1,8 @@
+#  [Deployed site here]([https://divinetiming.herokuapp.com/](https://brain-dash-frontend.onrender.com/))
+
 #  Live Match Dashboard - For Gaming Company
 
-A real-time football analytics dashboard built for Brain Analytics, featuring live AI-powered match commentary, tactical pitch tracking, and live match statistics for Liverpool vs Manchester City.
+A real-time football analytics dashboard built for a Gaming Company, featuring live AI-powered match commentary, tactical pitch tracking, and live match statistics for Liverpool vs Manchester City.
 
 ---
 
@@ -167,7 +169,8 @@ The `MatchProcessor` is the brain of this application — it calculates pitch zo
 
 ### Test Report
 
-![Pytest Report](app/public/assets/report-html.jpg)
+![report-html](https://github.com/user-attachments/assets/225a82aa-d8d6-4121-94e9-b43b9fad1d30)
+
 
 The test suite was run on **31 March 2026** inside the Docker container using Python 3.11.15 with pytest 7.4.3. All 13 tests passed in 4ms with zero failures, skips or errors.
 
