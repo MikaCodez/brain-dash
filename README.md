@@ -1,4 +1,4 @@
-#  [Deployed site here]([https://divinetiming.herokuapp.com/](https://brain-dash-frontend.onrender.com/))
+#  [Deployed site here]([https://brain-dash-frontend.onrender.com/])
 
 #  Live Match Dashboard - For Gaming Company
 
