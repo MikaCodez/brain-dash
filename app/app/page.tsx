@@ -34,7 +34,7 @@ export default function MatchDashboard() {
 
         {/* Left */}
         <div style={{display:'flex', alignItems:'center', gap:'10px'}}>
-          <div style={{width:'38px', height:'38px', borderRadius:'10px', background:'linear-gradient(135deg, #7c3aed 0%, #2563eb 25%, #f59e0b 50%, #ef4444 75%, #f97316 100%)', display:'flex', alignItems:'center', justifyContent:'center', color:'white', fontWeight:900, fontSize:'0.85rem', boxShadow:'0 2px 8px rgba(124,58,237,0.3)'}}>ML</div>
+          <div style={{width:'38px', height:'38px', borderRadius:'10px', background:'linear-gradient(135deg, #7c3aed 0%, #2563eb 25%, #f59e0b 50%, #ef4444 75%, #f97316 100%)', display:'flex', alignItems:'center', justifyContent:'center', color:'white', fontWeight:900, fontSize:'0.85rem', boxShadow:'0 2px 8px rgba(124,58,237,0.3)'}}>BA</div>
           <div>
             <p style={{margin:0, fontWeight:700, fontSize:'0.9rem', color:t.heading}}>Malcolm Leagues</p>
             <p style={{margin:0, fontSize:'0.7rem', color:t.subtext}}>Live Match Centre</p>
@@ -43,7 +43,7 @@ export default function MatchDashboard() {
 
         {/* Center: Branding */}
         <div style={{position:'absolute', left:'50%', transform:'translateX(-50%)'}}>
-          <p style={{margin:0, fontWeight:700, fontSize:'0.75rem', color:t.subtext, letterSpacing:'0.05em'}}>MAKZ+CODE47</p>
+          <img src="/assets/Malcz.png" alt="Malcz" style={{height:'34px', objectFit:'contain', borderRadius:'6px'}} />
         </div>
 
         {/* Right */}
