@@ -10,15 +10,18 @@ The dashboard was designed with accessibility and readability as core principles
 
 ### Light Mode — Full Dashboard
 
-![Light Mode Dashboard](app/public/assets/light-mode.jpg)
+![light-mode](https://github.com/user-attachments/assets/14e14cc1-b895-45ce-867b-ceecc42c09d4)
+
+
 
 The light mode presents a clean, high-contrast layout suitable for daytime use or brightly lit environments. The white card system clearly separates each panel — commentary, pitch, and stats — making it easy to scan at a glance. Liverpool red and Man City blue are used consistently as team identifiers throughout every component, ensuring the viewer always knows which team is in possession or action without needing to read text.
 
 ---
 
 ### Dark Mode — Full Dashboard
+![dark-mode](https://github.com/user-attachments/assets/f175e5f4-89d8-427e-8fa6-321bc294a1f0)
 
-![Dark Mode Dashboard](app/public/assets/dark-mode.jpg)
+
 
 The dark mode uses deep navy and charcoal tones that reduce eye strain during extended viewing or evening use. All text meets WCAG AA contrast standards against the dark backgrounds. The toggle is accessible from the top-right navbar at any point. Both modes share identical layouts so there is no cognitive adjustment when switching between them.
 
@@ -26,7 +29,9 @@ The dark mode uses deep navy and charcoal tones that reduce eye strain during ex
 
 ### Live Commentary Feed
 
-![Live Commentary Feed](app/public/assets/commentary-feed.jpg)
+![commentary-feed](https://github.com/user-attachments/assets/7ca5bf20-438d-4c8d-9545-104faab02b64)
+
+
 
 Each event card in the commentary feed is colour-coded by event type — green for passes and interceptions, red for fouls and cards, blue for tackles — providing instant visual context before the viewer reads the commentary text. Player name badges are coloured by team (Liverpool red, Man City blue). The most recent event is always highlighted at the top with a stronger border and background. Cards fade gently as they scroll down, reducing visual noise from older events while keeping them accessible for reference.
 
@@ -34,7 +39,8 @@ Each event card in the commentary feed is colour-coded by event type — green f
 
 ### Tactical Pitch View
 
-![Tactical Pitch View](app/public/assets/tactical-view.jpg)
+![tactical-view](https://github.com/user-attachments/assets/64461adb-e2d0-4674-8857-a5b23314bc01)
+
 
 The tactical view uses a real aerial stadium photograph as the pitch background, giving the viewer a sense of presence rather than an abstract diagram. A ⚽ football tracks the ball's x/y coordinates from the match data in real time, with a subtle pulse animation to draw the eye. The current event type is shown as a badge in the top-right corner, and a label at the bottom shows the exact event and player name — allowing the viewer to follow the flow of play spatially without relying purely on the commentary text.
 
@@ -42,7 +48,8 @@ The tactical view uses a real aerial stadium photograph as the pitch background,
 
 ### Possession & Match Stats
 
-![Possession and Match Stats](app/public/assets/stats.jpg)
+![stats](https://github.com/user-attachments/assets/e573e57d-bbb4-4bdc-8b2d-29cc543ea363)
+
 
 The stats panel surfaces eight live metrics per team in a mirrored bar format — Liverpool stats on the left in red, Man City on the right in blue. This symmetrical layout makes comparisons instant. The possession bar at the top gives a quick overall impression of dominance, while the detailed rows below (Shots, On Target, Passes, Tackles, Interceptions, Fouls, Corners, Saves) allow deeper analysis. All bars animate smoothly as values update, providing a sense of momentum shifting throughout the match.
 
@@ -289,7 +296,7 @@ takehome-malcolm-wiredu/
 ## Built By
 
 **Malcolm Wiredu** — Full Stack Developer  
-Takehome assignment for Brain Analytics
+Full Stack Application For Gaming Company
 
 ## Credits
 
